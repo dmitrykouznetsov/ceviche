@@ -32,7 +32,7 @@ def curl_H(axis, Hx, Hy, Hz, dL):
 """======================= STUFF THAT CONSTRUCTS THE DERIVATIVE MATRIX ==========================="""
 
 def compute_derivative_matrices(omega, shape, npml, dL, bloch_x=0.0, bloch_y=0.0):
-    """ Returns sparse derivative matrices.  Currently works for 2D and 1D 
+    """ Returns sparse derivative matrices.  Currently works for 2D and 1D
             omega: angular frequency (rad/sec)
             shape: shape of the FDFD grid
             npml: list of number of PML cells in x and y.
@@ -70,12 +70,12 @@ def createDws(component, dir, shape, dL, bloch_x=0.0, bloch_y=0.0):
             block_y: bloch phase (phase across periodic boundary) in y
     """
 
-    Nx, Ny = shape    
+    Nx, Ny = shape
 
     # special case, a 1D problem
     if component == 'x' and Nx == 1:
         return sp.eye(Ny)
-    if component is 'y' and Ny == 1:
+    if component == 'y' and Ny == 1:
         return sp.eye(Nx)
 
     # select a `make_D` function based on the component and direction
@@ -134,7 +134,7 @@ def create_S_matrices(omega, shape, npml, dL):
     N = Nx * Ny
     x_range = [0, float(dL * Nx)]
     y_range = [0, float(dL * Ny)]
-    Nx_pml, Ny_pml = npml    
+    Nx_pml, Ny_pml = npml
 
     # Create the sfactor in each direction and for 'f' and 'b'
     s_vector_x_f = create_sfactor('f', omega, dL, Nx, Nx_pml)
